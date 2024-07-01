@@ -1,0 +1,1 @@
+/usr/bin/aarch64-linux-gnu-gcc -rdynamic CMakeFiles/ta2ta_test.dir/main.o -o CMakeFiles/CMakeRelink.dir/ta2ta_test  -lteec 

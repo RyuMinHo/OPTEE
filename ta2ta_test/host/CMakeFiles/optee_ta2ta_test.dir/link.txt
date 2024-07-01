@@ -1,0 +1,1 @@
+/usr/bin/aarch64-linux-gnu-gcc -rdynamic CMakeFiles/optee_ta2ta_test.dir/main.o -o optee_ta2ta_test  -lteec 

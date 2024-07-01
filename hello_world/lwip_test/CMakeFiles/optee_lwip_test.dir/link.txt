@@ -1,0 +1,1 @@
+ccache /usr/bin/aarch64-linux-gnu-gcc -rdynamic CMakeFiles/optee_lwip_test.dir/host/main.c.o -o optee_lwip_test  -lteec 
