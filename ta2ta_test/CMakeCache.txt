@@ -123,7 +123,7 @@ CMAKE_PROJECT_DESCRIPTION:STATIC=
 CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=ta2ta_test
+CMAKE_PROJECT_NAME:STATIC=optee_ta2ta_test
 
 //Path to a program.
 CMAKE_RANLIB:FILEPATH=/usr/bin/aarch64-linux-gnu-ranlib
@@ -192,6 +192,15 @@ EXECUTABLE_OUTPUT_PATH:PATH=
 
 //Single output directory for building all libraries.
 LIBRARY_OUTPUT_PATH:PATH=
+
+//Value Computed by CMake
+optee_ta2ta_test_BINARY_DIR:STATIC=/home/minho/optee_qemu/optee_examples/ta2ta_test
+
+//Value Computed by CMake
+optee_ta2ta_test_IS_TOP_LEVEL:STATIC=ON
+
+//Value Computed by CMake
+optee_ta2ta_test_SOURCE_DIR:STATIC=/home/minho/optee_qemu/optee_examples/ta2ta_test
 
 //Value Computed by CMake
 ta2ta_test_BINARY_DIR:STATIC=/home/minho/optee_qemu/optee_examples/ta2ta_test

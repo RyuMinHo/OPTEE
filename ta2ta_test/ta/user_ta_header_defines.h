@@ -36,7 +36,7 @@
 #include <hello_world_ta.h>
 
 #define TA_UUID				TA_HELLO_WORLD_UUID
-
+#define TA_UUID_TA2			TA_TA2TA_UUID
 /*
  * TA properties: multi-instance TA, no specific attribute
  * TA_FLAG_EXEC_DDR is meaningless but mandated.

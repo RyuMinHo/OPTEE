@@ -39,4 +39,4 @@
 /* The function IDs implemented in this TA */
 #define TA_TA2TA_CMD	        3		
 
-#endif /*TA_HELLO_WORLD_H*/
+#endif /*TA_TA2TA_H*/

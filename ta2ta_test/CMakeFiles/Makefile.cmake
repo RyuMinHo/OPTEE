@@ -39,5 +39,5 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/ta2ta_test.dir/DependInfo.cmake"
+  "CMakeFiles/optee_ta2ta_test.dir/DependInfo.cmake"
   )

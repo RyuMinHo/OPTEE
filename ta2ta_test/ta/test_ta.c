@@ -31,6 +31,11 @@
 #include <hello_world_ta.h>
 #include <ta2ta_ta.h>
 
+const static TEE_UUID uuid_ta2ta = { 0x8aaaf200, 0x2450, 0x11e4, 
+                { 0xab, 0xe2, 0x00, 0x02, 0xa5, 0xd5, 0xc5, 0x1b} };
+
+static TEE_TASessionHandle session = TEE_HANDLE_NULL;
+
 uint32_t sys_now(void);
 static void get_monotonic_time(TEE_Time *t);
 //static TEE_Result lwip_port_rand(uint32_t param_types, TEE_Param params[4]);
@@ -40,6 +45,7 @@ get_monotonic_time(TEE_Time *t) {
 //	TEE_MemFill(t, 0, sizeof(TEE_Time));
 	TEE_GetSystemTime(t);
 }
+
 
 uint32_t
 sys_now(void) {
@@ -154,19 +160,19 @@ static TEE_Result inc_value(uint32_t param_types, TEE_Param params[4])
 	params[0].value.a++;
 	IMSG("Increase value to: %u", params[0].value.a);
 
-	static TEE_TASessionHandle session = TEE_HANDLE_NULL;
-	const static TEE_UUID uuid_ta2ta = TA_TA2TA_UUID;
 
 	if ( session == TEE_HANDLE_NULL ) {
 		IMSG("TA1: Gonna call TEE_OpenTASession");
-		TEE_Result res = TEE_OpenTASession(&uuid_ta2ta, TEE_TIMEOUT_INFINITE, param_types, params, &session, NULL);
+		uint32_t my_param_types = TEE_PARAM_TYPES(TEE_PARAM_TYPE_NONE, TEE_PARAM_TYPE_NONE, TEE_PARAM_TYPE_NONE, TEE_PARAM_TYPE_NONE);
+
+		TEE_Result res = TEE_OpenTASession(&uuid_ta2ta, TEE_TIMEOUT_INFINITE, my_param_types, params, &session, NULL);
 
 		if(res != TEE_SUCCESS) {
 			IMSG("Failed to open session with TA2: 0x%x", res);
 			return res;
 		}
 		IMSG("TA1: Gonna call TEE_InvokeTACommand");
-		res = TEE_InvokeTACommand(session, TEE_TIMEOUT_INFINITE, TA_TA2TA_CMD, param_types, params, NULL);
+		res = TEE_InvokeTACommand(session, TEE_TIMEOUT_INFINITE, 0, param_types, params, NULL);
 		if(res != TEE_SUCCESS) {
 			IMSG("Failed to TEE_InvokeCommand");
 			TEE_CloseTASession(session);
@@ -219,7 +225,6 @@ static TEE_Result dec_value(uint32_t param_types,
 TEE_Result TA_InvokeCommandEntryPoint(void __maybe_unused *sess_ctx, uint32_t cmd_id, uint32_t param_types, TEE_Param params[4])
 {
 	(void)&sess_ctx; /* Unused parameter */
-	IMSG("TA1: Gonna Invoke Command Entry Point for TA2");
 	switch (cmd_id) {
 	case TA_HELLO_WORLD_CMD_INC_VALUE:
 		return inc_value(param_types, params);
