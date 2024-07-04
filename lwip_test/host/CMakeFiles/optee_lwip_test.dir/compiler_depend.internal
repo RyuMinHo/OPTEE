@@ -3,12 +3,12 @@
 
 CMakeFiles/optee_lwip_test.dir/main.o
  /home/minho/optee_qemu/optee_examples/lwip_test/host/main.c
- /usr/aarch64-linux-gnu/include/stdc-predef.h
+ /home/minho/optee_qemu/optee_examples/lwip_test/ta/include/stdc-predef.h
  /usr/aarch64-linux-gnu/include/err.h
- /usr/aarch64-linux-gnu/include/features.h
- /usr/aarch64-linux-gnu/include/features-time64.h
- /usr/aarch64-linux-gnu/include/bits/wordsize.h
- /usr/aarch64-linux-gnu/include/bits/timesize.h
+ /home/minho/optee_qemu/optee_examples/lwip_test/ta/include/features.h
+ /home/minho/optee_qemu/optee_examples/lwip_test/ta/include/features-time64.h
+ /home/minho/optee_qemu/optee_examples/lwip_test/ta/include/bits/wordsize.h
+ /home/minho/optee_qemu/optee_examples/lwip_test/ta/include/bits/timesize.h
  /usr/aarch64-linux-gnu/include/sys/cdefs.h
  /usr/aarch64-linux-gnu/include/bits/long-double.h
  /usr/aarch64-linux-gnu/include/gnu/stubs.h

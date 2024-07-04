@@ -26,24 +26,27 @@ typedef enum {
 typedef struct {
     struct tcp_pcb *pcb;
     client_state_t state;
+	char message[100] = "Hello Client\n";
 } client_t;
 
-client_t client = { .pcb = NULL, .state = STATE_DISCONNECTED };
+// global var
+client_t client = {
+	.pcb = NULL, 
+	.state = STATE_DISCONNECTED 
+};
+
 
 ip_addr_t client_ip;
 
-static err_t client_connect(void *arg, struct tcp_pcb *tpcb, err_t err) {
-	
-	if(err != ERR_OK) {
-		return err;
-	}
 
-	tcp_write(tpcb, client_ctx.message, strlen(client_ctx.message), TCP_WRITE_FLAG_COPY);
-	tcp_close(tpcb);
-
-	return ERR_OK;
+// 1. init client pcb
+static TEE_Result client_init() {
+	client.pcb = tcp_new();
+	printf("INIT CLIENT PCB\n");
+	return TEE_SUCCESS;
 }
 
+/* 2. client connect setting */
 static TEE_Result client_connect(uint32_t param_types, TEE_Param params[4]) {
 	uint32_t exp_param_types = TEE_PARAM_TYPES(TEE_PARAM_TYPE_MEMREF_INPUT,
                                                    TEE_PARAM_TYPE_NONE,
@@ -54,22 +57,41 @@ static TEE_Result client_connect(uint32_t param_types, TEE_Param params[4]) {
         return TEE_ERROR_BAD_PARAMETERS;
     }
 
-    strncpy(client_ctx.message, (char *)params[0].memref.buffer, sizeof(client_ctx.message) - 1);
-    client_ctx.message[sizeof(client_ctx.message) - 1] = '\0';
+    strncpy(client.message, (char *)params[0].memref.buffer, sizeof(client.message) - 1);
+    client.message[sizeof(client.message) - 1] = '\0';
+	
+	printf("strcpy clear\n");
 
     lwip_init();
-    client_ctx.pcb = tcp_new();
-    if (!client_ctx.pcb) {
+    // client.pcb = tcp_new();
+    if (!client.pcb) {
         return TEE_ERROR_OUT_OF_MEMORY;
     }
+	ip4_addr_t ipaddr, netmask, gw;
+	IP4_ADDR(&ipaddr, 192, 168, 1, 101);
+	IP4_ADDR(&netmask, 255, 255, 255, 0);
+	IP4_ADDR(&gw, 192, 168, 1, 1);
+    // IP4_ADDR(&client.server_ip, 192, 168, 1, 100);
+    client.port = 7;
 
-    IP4_ADDR(&client_ctx.server_ip, 192, 168, 1, 100);
-    client_ctx.port = 7;
-
-    tcp_connect(client_ctx.pcb, &client_ctx.server_ip, client_ctx.port, client_connected);
+    tcp_connect(client.pcb, &client.server_ip, client.port, client_connected); 
 
     return TEE_SUCCESS;
 }
+
+/* 3. call back function by 2 */
+static err_t client_connected(void *arg, struct tcp_pcb *tpcb, err_t err) {
+	struct tcp_pcb = tcp_new(); 
+    if(err != ERR_OK) {
+		return err;
+	}
+	tcp_write(tpcb, client.message, strlen(client.message), TCP_WRITE_FLAG_COPY);
+    tcp_close(tpcb);
+	printf("CLIENT CONNECTED\n");
+	return ERR_OK;
+}
+
+
 
 TEE_Result TA_CreateEntryPoint(void) {
 	DMSG("in client side");
@@ -110,9 +132,13 @@ TEE_Result TA_InvokeTACommandEntryPoint(void *sess_ctx, uint32_t cmd_id,
 	(void)&sess_ctx;
 
 	switch(cmd_id) {
+		case TA_CLIENT_INIT:
+			printf("TA client init\n");
+			return client_init();
 		case TA_CLIENT_CONNECT:
 			return client_connect(param_types, params);
 		default:
 			return TEE_ERROR_BAD_PARAMETERS;
 	}
 }
+
