@@ -49,5 +49,5 @@ CMakeFiles/optee_lwip_test.dir/main.o
  /usr/aarch64-linux-gnu/include/bits/pthread_stack_min-dynamic.h
  /usr/aarch64-linux-gnu/include/bits/pthread_stack_min.h
  /usr/aarch64-linux-gnu/include/bits/posix2_lim.h
- /home/minho/optee_qemu/optee_examples/lwip_test/ta/include/lwip_test_ta.h
+ /home/minho/optee_qemu/optee_examples/lwip_test/ta/include/ta_server_side.h
 

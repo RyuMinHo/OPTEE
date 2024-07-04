@@ -33,9 +33,9 @@
 #define USER_TA_HEADER_DEFINES_H
 
 /* To get the TA UUID definition */
-#include <lwip_test_ta.h>
+#include <ta_client_side.h>
 
-#define TA_UUID				TA_LWIP_TEST_UUID
+#define TA_UUID				TA_CLIENT_SIDE_UUID
 
 /*
  * TA properties: multi-instance TA, no specific attribute

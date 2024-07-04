@@ -60,6 +60,5 @@ srcs-y += netif/ppp/utils.c
 srcs-y += netif/ppp/vj.c
 srcs-y += core/ipv4/ip4_frag.c
 srcs-y += netif/ppp/polarssl/md5.c
-srcs-y += tcpecho_raw.c
-#srcs-y += test.c
+#srcs-y += tcpecho_raw.c
 #srcs-y += echo_server.c

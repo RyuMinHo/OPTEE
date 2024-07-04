@@ -1,4 +1,4 @@
-# Install script for directory: /home/minho/optee_qemu/optee_examples
+# Install script for directory: /home/minho/optee_qemu/optee_examples/hello_world
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -42,27 +42,19 @@ if(NOT DEFINED CMAKE_OBJDUMP)
   set(CMAKE_OBJDUMP "/usr/bin/aarch64-linux-gnu-objdump")
 endif()
 
-if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  # Include the install script for each subdirectory.
-  include("/home/minho/optee_qemu/optee_examples/hello_world/acipher/cmake_install.cmake")
-  include("/home/minho/optee_qemu/optee_examples/hello_world/aes/cmake_install.cmake")
-  include("/home/minho/optee_qemu/optee_examples/hello_world/hello_world/cmake_install.cmake")
-  include("/home/minho/optee_qemu/optee_examples/hello_world/hotp/cmake_install.cmake")
-  include("/home/minho/optee_qemu/optee_examples/hello_world/lwip_test/cmake_install.cmake")
-  include("/home/minho/optee_qemu/optee_examples/hello_world/plugins/cmake_install.cmake")
-  include("/home/minho/optee_qemu/optee_examples/hello_world/random/cmake_install.cmake")
-  include("/home/minho/optee_qemu/optee_examples/hello_world/secure_storage/cmake_install.cmake")
-  include("/home/minho/optee_qemu/optee_examples/hello_world/ta2ta_test/cmake_install.cmake")
-
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/optee_example_hello_world" AND
+     NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/optee_example_hello_world")
+    file(RPATH_CHECK
+         FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/optee_example_hello_world"
+         RPATH "")
+  endif()
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE EXECUTABLE FILES "/home/minho/optee_qemu/optee_examples/hello_world/optee_example_hello_world")
+  if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/optee_example_hello_world" AND
+     NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/optee_example_hello_world")
+    if(CMAKE_INSTALL_DO_STRIP)
+      execute_process(COMMAND "/usr/bin/aarch64-linux-gnu-strip" "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/optee_example_hello_world")
+    endif()
+  endif()
 endif()
 
-if(CMAKE_INSTALL_COMPONENT)
-  set(CMAKE_INSTALL_MANIFEST "install_manifest_${CMAKE_INSTALL_COMPONENT}.txt")
-else()
-  set(CMAKE_INSTALL_MANIFEST "install_manifest.txt")
-endif()
-
-string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
-       "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/minho/optee_qemu/optee_examples/hello_world/${CMAKE_INSTALL_MANIFEST}"
-     "${CMAKE_INSTALL_MANIFEST_CONTENT}")

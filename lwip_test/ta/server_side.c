@@ -5,7 +5,8 @@
 /* OPTEE includes */
 #include <tee_internal_api.h>
 #include <tee_internal_api_extensions.h>
-#include <lwip_test_ta.h>
+#include <ta_server_side.h>
+#include <ta_client_side.h>
 
 #include "lwip/init.h"
 #include "lwip/tcp.h"
@@ -424,7 +425,7 @@ static TEE_Result my_init(uint32_t param_types, TEE_Param params[4]) {
 
 		IMSG("Server gonna start initilizing Client by TA2TA Protocol");
 		//CLIENT_INIT -> tcp_new()
-		res = TEE_InvokeTACommand(session, TEE_TIMEOUT_INFINITE, CLIENT_NEW, my_param_types, params, NULL);
+		res = TEE_InvokeTACommand(session, TEE_TIMEOUT_INFINITE, TA_CLIENT_INIT, my_param_types, params, NULL);
 		if ( res != TEE_SUCCESS ) {
 			IMSG("Failed to TEE_InvokeTACommand while initializing client");
 			TEE_CloseTASession(session);
@@ -432,7 +433,7 @@ static TEE_Result my_init(uint32_t param_types, TEE_Param params[4]) {
 			return res;
 		}
 		//CLIENT_CONNECT -> tcp_connect()
-		res = TEE_InvokeTACommand(session, TEE_TIMEOUT_INFINITE, CLIENT_CONNECT, my_param_types, params, NULL);
+		res = TEE_InvokeTACommand(session, TEE_TIMEOUT_INFINITE, TA_CLIENT_CONNECT, my_param_types, params, NULL);
 		if ( res != TEE_SUCCESS ) {
                         IMSG("Failed to TEE_InvokeTACommand while trying to connect client to server");
                         TEE_CloseTASession(session);
@@ -441,7 +442,7 @@ static TEE_Result my_init(uint32_t param_types, TEE_Param params[4]) {
                 }
 
 		tcp_accept(server.pcb, server_accept);
-	
+/*	
 		res = TEE_InvokeTACommand(session, TEE_TIMEOUT_INFINITE, CLIENT_WRITE, my_param_types, params, NULL);
 		if ( res != TEE_SUCCESS ) {
 			IMSG("Failed to TEE_InvokeTACommand while trying to write data in client pcb from client section");
@@ -452,13 +453,12 @@ static TEE_Result my_init(uint32_t param_types, TEE_Param params[4]) {
 
 		res = TEE_InvokeTACommand(session, TEE_TIMEOUT_INFINITE, CLIENT_RECV, my_param_types, params, NULL);
 
-
+*/
 	}
 
 	TEE_Wait(500);
 
 //	tcp_accept(server.pcb, server_accept);
-
 		
 	TEE_CloseTASession(session);
 	

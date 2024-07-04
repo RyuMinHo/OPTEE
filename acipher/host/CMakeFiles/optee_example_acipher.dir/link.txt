@@ -1,0 +1,1 @@
+/usr/bin/aarch64-linux-gnu-gcc -rdynamic CMakeFiles/optee_example_acipher.dir/main.o -o optee_example_acipher  -lteec 

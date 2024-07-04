@@ -60,7 +60,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /home/minho/optee_qemu/optee_examples
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/minho/optee_qemu/optee_examples/hello_world
+CMAKE_BINARY_DIR = /home/minho/optee_qemu/optee_examples
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -132,14 +132,14 @@ install/strip/fast: preinstall/fast
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/minho/optee_qemu/optee_examples/hello_world/CMakeFiles /home/minho/optee_qemu/optee_examples/hello_world//CMakeFiles/progress.marks
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/minho/optee_qemu/optee_examples/hello_world/CMakeFiles 0
+	cd /home/minho/optee_qemu/optee_examples && $(CMAKE_COMMAND) -E cmake_progress_start /home/minho/optee_qemu/optee_examples/CMakeFiles /home/minho/optee_qemu/optee_examples/hello_world//CMakeFiles/progress.marks
+	cd /home/minho/optee_qemu/optee_examples && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 hello_world/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/minho/optee_qemu/optee_examples/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 clean
+	cd /home/minho/optee_qemu/optee_examples && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 hello_world/clean
 .PHONY : clean
 
 # The main clean target
@@ -148,148 +148,56 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 preinstall
+	cd /home/minho/optee_qemu/optee_examples && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 hello_world/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 preinstall
+	cd /home/minho/optee_qemu/optee_examples && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 hello_world/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/minho/optee_qemu/optee_examples && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
-#=============================================================================
-# Target rules for targets named optee_example_acipher
+# Convenience name for target.
+hello_world/CMakeFiles/optee_example_hello_world.dir/rule:
+	cd /home/minho/optee_qemu/optee_examples && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 hello_world/CMakeFiles/optee_example_hello_world.dir/rule
+.PHONY : hello_world/CMakeFiles/optee_example_hello_world.dir/rule
 
-# Build rule for target.
-optee_example_acipher: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 optee_example_acipher
-.PHONY : optee_example_acipher
-
-# fast build rule for target.
-optee_example_acipher/fast:
-	$(MAKE) $(MAKESILENT) -f acipher/CMakeFiles/optee_example_acipher.dir/build.make acipher/CMakeFiles/optee_example_acipher.dir/build
-.PHONY : optee_example_acipher/fast
-
-#=============================================================================
-# Target rules for targets named optee_example_aes
-
-# Build rule for target.
-optee_example_aes: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 optee_example_aes
-.PHONY : optee_example_aes
-
-# fast build rule for target.
-optee_example_aes/fast:
-	$(MAKE) $(MAKESILENT) -f aes/CMakeFiles/optee_example_aes.dir/build.make aes/CMakeFiles/optee_example_aes.dir/build
-.PHONY : optee_example_aes/fast
-
-#=============================================================================
-# Target rules for targets named optee_example_hello_world
-
-# Build rule for target.
-optee_example_hello_world: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 optee_example_hello_world
+# Convenience name for target.
+optee_example_hello_world: hello_world/CMakeFiles/optee_example_hello_world.dir/rule
 .PHONY : optee_example_hello_world
 
 # fast build rule for target.
 optee_example_hello_world/fast:
-	$(MAKE) $(MAKESILENT) -f hello_world/CMakeFiles/optee_example_hello_world.dir/build.make hello_world/CMakeFiles/optee_example_hello_world.dir/build
+	cd /home/minho/optee_qemu/optee_examples && $(MAKE) $(MAKESILENT) -f hello_world/CMakeFiles/optee_example_hello_world.dir/build.make hello_world/CMakeFiles/optee_example_hello_world.dir/build
 .PHONY : optee_example_hello_world/fast
 
-#=============================================================================
-# Target rules for targets named optee_example_hotp
+host/main.o: host/main.c.o
+.PHONY : host/main.o
 
-# Build rule for target.
-optee_example_hotp: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 optee_example_hotp
-.PHONY : optee_example_hotp
+# target to build an object file
+host/main.c.o:
+	cd /home/minho/optee_qemu/optee_examples && $(MAKE) $(MAKESILENT) -f hello_world/CMakeFiles/optee_example_hello_world.dir/build.make hello_world/CMakeFiles/optee_example_hello_world.dir/host/main.c.o
+.PHONY : host/main.c.o
 
-# fast build rule for target.
-optee_example_hotp/fast:
-	$(MAKE) $(MAKESILENT) -f hotp/CMakeFiles/optee_example_hotp.dir/build.make hotp/CMakeFiles/optee_example_hotp.dir/build
-.PHONY : optee_example_hotp/fast
+host/main.i: host/main.c.i
+.PHONY : host/main.i
 
-#=============================================================================
-# Target rules for targets named optee_lwip_test
+# target to preprocess a source file
+host/main.c.i:
+	cd /home/minho/optee_qemu/optee_examples && $(MAKE) $(MAKESILENT) -f hello_world/CMakeFiles/optee_example_hello_world.dir/build.make hello_world/CMakeFiles/optee_example_hello_world.dir/host/main.c.i
+.PHONY : host/main.c.i
 
-# Build rule for target.
-optee_lwip_test: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 optee_lwip_test
-.PHONY : optee_lwip_test
+host/main.s: host/main.c.s
+.PHONY : host/main.s
 
-# fast build rule for target.
-optee_lwip_test/fast:
-	$(MAKE) $(MAKESILENT) -f lwip_test/CMakeFiles/optee_lwip_test.dir/build.make lwip_test/CMakeFiles/optee_lwip_test.dir/build
-.PHONY : optee_lwip_test/fast
-
-#=============================================================================
-# Target rules for targets named optee_example_plugins
-
-# Build rule for target.
-optee_example_plugins: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 optee_example_plugins
-.PHONY : optee_example_plugins
-
-# fast build rule for target.
-optee_example_plugins/fast:
-	$(MAKE) $(MAKESILENT) -f plugins/CMakeFiles/optee_example_plugins.dir/build.make plugins/CMakeFiles/optee_example_plugins.dir/build
-.PHONY : optee_example_plugins/fast
-
-#=============================================================================
-# Target rules for targets named 96bcf744-4f72-4866-bf1d-8634fd9c65e5.plugin
-
-# Build rule for target.
-96bcf744-4f72-4866-bf1d-8634fd9c65e5.plugin: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 96bcf744-4f72-4866-bf1d-8634fd9c65e5.plugin
-.PHONY : 96bcf744-4f72-4866-bf1d-8634fd9c65e5.plugin
-
-# fast build rule for target.
-96bcf744-4f72-4866-bf1d-8634fd9c65e5.plugin/fast:
-	$(MAKE) $(MAKESILENT) -f plugins/syslog/CMakeFiles/96bcf744-4f72-4866-bf1d-8634fd9c65e5.plugin.dir/build.make plugins/syslog/CMakeFiles/96bcf744-4f72-4866-bf1d-8634fd9c65e5.plugin.dir/build
-.PHONY : 96bcf744-4f72-4866-bf1d-8634fd9c65e5.plugin/fast
-
-#=============================================================================
-# Target rules for targets named optee_example_random
-
-# Build rule for target.
-optee_example_random: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 optee_example_random
-.PHONY : optee_example_random
-
-# fast build rule for target.
-optee_example_random/fast:
-	$(MAKE) $(MAKESILENT) -f random/CMakeFiles/optee_example_random.dir/build.make random/CMakeFiles/optee_example_random.dir/build
-.PHONY : optee_example_random/fast
-
-#=============================================================================
-# Target rules for targets named optee_example_secure_storage
-
-# Build rule for target.
-optee_example_secure_storage: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 optee_example_secure_storage
-.PHONY : optee_example_secure_storage
-
-# fast build rule for target.
-optee_example_secure_storage/fast:
-	$(MAKE) $(MAKESILENT) -f secure_storage/CMakeFiles/optee_example_secure_storage.dir/build.make secure_storage/CMakeFiles/optee_example_secure_storage.dir/build
-.PHONY : optee_example_secure_storage/fast
-
-#=============================================================================
-# Target rules for targets named ta2ta_test
-
-# Build rule for target.
-ta2ta_test: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ta2ta_test
-.PHONY : ta2ta_test
-
-# fast build rule for target.
-ta2ta_test/fast:
-	$(MAKE) $(MAKESILENT) -f ta2ta_test/CMakeFiles/ta2ta_test.dir/build.make ta2ta_test/CMakeFiles/ta2ta_test.dir/build
-.PHONY : ta2ta_test/fast
+# target to generate assembly for a file
+host/main.c.s:
+	cd /home/minho/optee_qemu/optee_examples && $(MAKE) $(MAKESILENT) -f hello_world/CMakeFiles/optee_example_hello_world.dir/build.make hello_world/CMakeFiles/optee_example_hello_world.dir/host/main.c.s
+.PHONY : host/main.c.s
 
 # Help Target
 help:
@@ -303,16 +211,10 @@ help:
 	@echo "... install/strip"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
-	@echo "... 96bcf744-4f72-4866-bf1d-8634fd9c65e5.plugin"
-	@echo "... optee_example_acipher"
-	@echo "... optee_example_aes"
 	@echo "... optee_example_hello_world"
-	@echo "... optee_example_hotp"
-	@echo "... optee_example_plugins"
-	@echo "... optee_example_random"
-	@echo "... optee_example_secure_storage"
-	@echo "... optee_lwip_test"
-	@echo "... ta2ta_test"
+	@echo "... host/main.o"
+	@echo "... host/main.i"
+	@echo "... host/main.s"
 .PHONY : help
 
 
@@ -324,6 +226,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/minho/optee_qemu/optee_examples && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

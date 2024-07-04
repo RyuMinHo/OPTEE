@@ -1,1 +1,0 @@
-ccache /usr/bin/aarch64-linux-gnu-gcc -rdynamic CMakeFiles/ta2ta_test.dir/host/main.c.o -o ta2ta_test  -lteec 

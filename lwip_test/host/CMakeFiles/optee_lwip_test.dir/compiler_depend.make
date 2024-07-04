@@ -48,10 +48,10 @@ CMakeFiles/optee_lwip_test.dir/main.o: main.c \
   /usr/aarch64-linux-gnu/include/bits/pthread_stack_min-dynamic.h \
   /usr/aarch64-linux-gnu/include/bits/pthread_stack_min.h \
   /usr/aarch64-linux-gnu/include/bits/posix2_lim.h \
-  ../ta/include/lwip_test_ta.h
+  ../ta/include/ta_server_side.h
 
 
-../ta/include/lwip_test_ta.h:
+../ta/include/ta_server_side.h:
 
 /usr/aarch64-linux-gnu/include/bits/local_lim.h:
 

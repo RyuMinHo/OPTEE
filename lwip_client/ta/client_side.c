@@ -38,48 +38,49 @@ client_t client = {
 	.message = "Hello Client\n"
 };
 
+struct tcp_pcb *client_pcb;
 
 ip_addr_t client_ip;
-
+ip_addr_t ip_to_connect;
 
 // 1. init client pcb
 static TEE_Result client_init() {
-	client.pcb = tcp_new();
+	client_pcb = tcp_new();
+	
+	if ( client_pcb == NULL ) {
+		IMSG("abcdabcdabcdbaabdcabcd");
+        	return TEE_ERROR_COMMUNICATION;
+    	
+	}
 	printf("INIT CLIENT PCB\n");
 	return TEE_SUCCESS;
 }
 
 /* 2. client connect setting */
-static TEE_Result client_connect(uint32_t param_types, TEE_Param params[4]) {
-	uint32_t exp_param_types = TEE_PARAM_TYPES(TEE_PARAM_TYPE_MEMREF_INPUT,
-                                                   TEE_PARAM_TYPE_NONE,
-                                                   TEE_PARAM_TYPE_NONE,
-                                                   TEE_PARAM_TYPE_NONE);
+static TEE_Result client_connect() {
 
-	if (param_types != exp_param_types) {
-        return TEE_ERROR_BAD_PARAMETERS;
-    }
-
-    strncpy(client.message, (char *)params[0].memref.buffer, sizeof(client.message) - 1);
-    client.message[sizeof(client.message) - 1] = '\0';
+    //strncpy(client.message, (char *)params[0].memref.buffer, sizeof(client.message) - 1);
+    //client.message[sizeof(client.message) - 1] = '\0';
 	
-	printf("STRCPY CLEAR\n");
+	//printf("STRCPY CLEAR\n");
 
-    lwip_init();
+    	lwip_init();
     // client.pcb = tcp_new();
-    if (!client.pcb) {
-        return TEE_ERROR_OUT_OF_MEMORY;
-    }
+/*
 	ip4_addr_t ipaddr, netmask, gw;
-	IP4_ADDR(&ipaddr, 192, 168, 1, 101);
+	IP4_ADDR(&ipaddr, 192, 168, 1, 100);
 	IP4_ADDR(&netmask, 255, 255, 255, 0);
 	IP4_ADDR(&gw, 192, 168, 1, 1);
-    // IP4_ADDR(&client.server_ip, 192, 168, 1, 100);
-    uint16_t client_port = 7;
+ */
+      	// IP4_ADDR(&client.server_ip, 192, 168, 1, 100);
+ 	
+	IP4_ADDR(&ip_to_connect, 192, 168, 1, 100);
 
-    tcp_connect(client.pcb, &client_ip, client_port, client_connected); 
+    	uint16_t port = 7;
 
-    return TEE_SUCCESS;
+    	tcp_connect(client_pcb, &ip_to_connect, port, client_connected); 
+
+    	return TEE_SUCCESS;
 }
 
 /* 3. call back function by 2 */
@@ -130,7 +131,7 @@ void TA_CloseSessionEntryPoint(void __maybe_unused *sess_ctx) {
 	IMSG("BYE CLIENT");
 }
 
-TEE_Result TA_InvokeTACommandEntryPoint(void *sess_ctx, uint32_t cmd_id,
+TEE_Result TA_InvokeCommandEntryPoint(void *sess_ctx, uint32_t cmd_id,
 					uint32_t param_types, TEE_Param params[4]) {
 	(void)&sess_ctx;
 
@@ -140,7 +141,7 @@ TEE_Result TA_InvokeTACommandEntryPoint(void *sess_ctx, uint32_t cmd_id,
 			return client_init();
 		case TA_CLIENT_CONNECT:
 			printf("TA CLIENT CONNECT\n");
-			return client_connect(param_types, params);
+			return client_connect();
 		default:
 			return TEE_ERROR_BAD_PARAMETERS;
 	}

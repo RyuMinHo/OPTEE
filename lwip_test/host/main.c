@@ -7,7 +7,7 @@
 #include <tee_client_api.h>
 
 /* for the UUID (found in the TA's header file) */
-#include <lwip_test_ta.h>
+#include <ta_server_side.h>
 
 int main(void) {
 	TEEC_Result res;

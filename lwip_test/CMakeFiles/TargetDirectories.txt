@@ -1,7 +1,0 @@
-/home/minho/optee_qemu/optee_examples/lwip_test/CMakeFiles/optee_lwip_test.dir
-/home/minho/optee_qemu/optee_examples/lwip_test/CMakeFiles/edit_cache.dir
-/home/minho/optee_qemu/optee_examples/lwip_test/CMakeFiles/rebuild_cache.dir
-/home/minho/optee_qemu/optee_examples/lwip_test/CMakeFiles/list_install_components.dir
-/home/minho/optee_qemu/optee_examples/lwip_test/CMakeFiles/install.dir
-/home/minho/optee_qemu/optee_examples/lwip_test/CMakeFiles/install/local.dir
-/home/minho/optee_qemu/optee_examples/lwip_test/CMakeFiles/install/strip.dir
