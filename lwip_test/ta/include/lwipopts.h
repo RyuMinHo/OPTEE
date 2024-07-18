@@ -319,7 +319,11 @@ void sys_check_core_locking(void);
 
 #ifndef LWIP_PLATFORM_ASSERT
 /* Define LWIP_PLATFORM_ASSERT to something to catch missing stdio.h includes */
-void lwip_example_app_platform_assert(const char *msg, int line, const char *file);
+static inline void lwip_example_app_platform_assert(const char *msg, int line, const char *file) {
+	printf("Assertion \"%s\" failed at line %d in %s\n", msg, line, file);
+	//fflush(NULL);
+	abort();
+}
 #define LWIP_PLATFORM_ASSERT(x) lwip_example_app_platform_assert(x, __LINE__, __FILE__)
 #endif
 

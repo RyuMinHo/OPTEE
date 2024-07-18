@@ -73,15 +73,15 @@ random/CMakeFiles/optee_example_random.dir/host/main.c.o: random/CMakeFiles/opte
 random/CMakeFiles/optee_example_random.dir/host/main.c.o: random/host/main.c
 random/CMakeFiles/optee_example_random.dir/host/main.c.o: random/CMakeFiles/optee_example_random.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/minho/optee_qemu/optee_examples/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object random/CMakeFiles/optee_example_random.dir/host/main.c.o"
-	cd /home/minho/optee_qemu/optee_examples/random && ccache /usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT random/CMakeFiles/optee_example_random.dir/host/main.c.o -MF CMakeFiles/optee_example_random.dir/host/main.c.o.d -o CMakeFiles/optee_example_random.dir/host/main.c.o -c /home/minho/optee_qemu/optee_examples/random/host/main.c
+	cd /home/minho/optee_qemu/optee_examples/random && ccache /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT random/CMakeFiles/optee_example_random.dir/host/main.c.o -MF CMakeFiles/optee_example_random.dir/host/main.c.o.d -o CMakeFiles/optee_example_random.dir/host/main.c.o -c /home/minho/optee_qemu/optee_examples/random/host/main.c
 
 random/CMakeFiles/optee_example_random.dir/host/main.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/optee_example_random.dir/host/main.c.i"
-	cd /home/minho/optee_qemu/optee_examples/random && /usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/minho/optee_qemu/optee_examples/random/host/main.c > CMakeFiles/optee_example_random.dir/host/main.c.i
+	cd /home/minho/optee_qemu/optee_examples/random && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/minho/optee_qemu/optee_examples/random/host/main.c > CMakeFiles/optee_example_random.dir/host/main.c.i
 
 random/CMakeFiles/optee_example_random.dir/host/main.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/optee_example_random.dir/host/main.c.s"
-	cd /home/minho/optee_qemu/optee_examples/random && /usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/minho/optee_qemu/optee_examples/random/host/main.c -o CMakeFiles/optee_example_random.dir/host/main.c.s
+	cd /home/minho/optee_qemu/optee_examples/random && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/minho/optee_qemu/optee_examples/random/host/main.c -o CMakeFiles/optee_example_random.dir/host/main.c.s
 
 # Object files for target optee_example_random
 optee_example_random_OBJECTS = \

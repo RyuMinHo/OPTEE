@@ -73,15 +73,15 @@ plugins/syslog/CMakeFiles/96bcf744-4f72-4866-bf1d-8634fd9c65e5.plugin.dir/syslog
 plugins/syslog/CMakeFiles/96bcf744-4f72-4866-bf1d-8634fd9c65e5.plugin.dir/syslog_plugin.c.o: plugins/syslog/syslog_plugin.c
 plugins/syslog/CMakeFiles/96bcf744-4f72-4866-bf1d-8634fd9c65e5.plugin.dir/syslog_plugin.c.o: plugins/syslog/CMakeFiles/96bcf744-4f72-4866-bf1d-8634fd9c65e5.plugin.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/minho/optee_qemu/optee_examples/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object plugins/syslog/CMakeFiles/96bcf744-4f72-4866-bf1d-8634fd9c65e5.plugin.dir/syslog_plugin.c.o"
-	cd /home/minho/optee_qemu/optee_examples/plugins/syslog && ccache /usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT plugins/syslog/CMakeFiles/96bcf744-4f72-4866-bf1d-8634fd9c65e5.plugin.dir/syslog_plugin.c.o -MF CMakeFiles/96bcf744-4f72-4866-bf1d-8634fd9c65e5.plugin.dir/syslog_plugin.c.o.d -o CMakeFiles/96bcf744-4f72-4866-bf1d-8634fd9c65e5.plugin.dir/syslog_plugin.c.o -c /home/minho/optee_qemu/optee_examples/plugins/syslog/syslog_plugin.c
+	cd /home/minho/optee_qemu/optee_examples/plugins/syslog && ccache /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT plugins/syslog/CMakeFiles/96bcf744-4f72-4866-bf1d-8634fd9c65e5.plugin.dir/syslog_plugin.c.o -MF CMakeFiles/96bcf744-4f72-4866-bf1d-8634fd9c65e5.plugin.dir/syslog_plugin.c.o.d -o CMakeFiles/96bcf744-4f72-4866-bf1d-8634fd9c65e5.plugin.dir/syslog_plugin.c.o -c /home/minho/optee_qemu/optee_examples/plugins/syslog/syslog_plugin.c
 
 plugins/syslog/CMakeFiles/96bcf744-4f72-4866-bf1d-8634fd9c65e5.plugin.dir/syslog_plugin.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/96bcf744-4f72-4866-bf1d-8634fd9c65e5.plugin.dir/syslog_plugin.c.i"
-	cd /home/minho/optee_qemu/optee_examples/plugins/syslog && /usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/minho/optee_qemu/optee_examples/plugins/syslog/syslog_plugin.c > CMakeFiles/96bcf744-4f72-4866-bf1d-8634fd9c65e5.plugin.dir/syslog_plugin.c.i
+	cd /home/minho/optee_qemu/optee_examples/plugins/syslog && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/minho/optee_qemu/optee_examples/plugins/syslog/syslog_plugin.c > CMakeFiles/96bcf744-4f72-4866-bf1d-8634fd9c65e5.plugin.dir/syslog_plugin.c.i
 
 plugins/syslog/CMakeFiles/96bcf744-4f72-4866-bf1d-8634fd9c65e5.plugin.dir/syslog_plugin.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/96bcf744-4f72-4866-bf1d-8634fd9c65e5.plugin.dir/syslog_plugin.c.s"
-	cd /home/minho/optee_qemu/optee_examples/plugins/syslog && /usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/minho/optee_qemu/optee_examples/plugins/syslog/syslog_plugin.c -o CMakeFiles/96bcf744-4f72-4866-bf1d-8634fd9c65e5.plugin.dir/syslog_plugin.c.s
+	cd /home/minho/optee_qemu/optee_examples/plugins/syslog && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/minho/optee_qemu/optee_examples/plugins/syslog/syslog_plugin.c -o CMakeFiles/96bcf744-4f72-4866-bf1d-8634fd9c65e5.plugin.dir/syslog_plugin.c.s
 
 # Object files for target 96bcf744-4f72-4866-bf1d-8634fd9c65e5.plugin
 96bcf744__4f72__4866__bf1d__8634fd9c65e5_plugin_OBJECTS = \

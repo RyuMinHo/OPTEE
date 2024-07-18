@@ -73,15 +73,15 @@ hello_world/CMakeFiles/optee_example_hello_world.dir/host/main.c.o: hello_world/
 hello_world/CMakeFiles/optee_example_hello_world.dir/host/main.c.o: hello_world/host/main.c
 hello_world/CMakeFiles/optee_example_hello_world.dir/host/main.c.o: hello_world/CMakeFiles/optee_example_hello_world.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/minho/optee_qemu/optee_examples/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object hello_world/CMakeFiles/optee_example_hello_world.dir/host/main.c.o"
-	cd /home/minho/optee_qemu/optee_examples/hello_world && ccache /usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT hello_world/CMakeFiles/optee_example_hello_world.dir/host/main.c.o -MF CMakeFiles/optee_example_hello_world.dir/host/main.c.o.d -o CMakeFiles/optee_example_hello_world.dir/host/main.c.o -c /home/minho/optee_qemu/optee_examples/hello_world/host/main.c
+	cd /home/minho/optee_qemu/optee_examples/hello_world && ccache /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT hello_world/CMakeFiles/optee_example_hello_world.dir/host/main.c.o -MF CMakeFiles/optee_example_hello_world.dir/host/main.c.o.d -o CMakeFiles/optee_example_hello_world.dir/host/main.c.o -c /home/minho/optee_qemu/optee_examples/hello_world/host/main.c
 
 hello_world/CMakeFiles/optee_example_hello_world.dir/host/main.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/optee_example_hello_world.dir/host/main.c.i"
-	cd /home/minho/optee_qemu/optee_examples/hello_world && /usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/minho/optee_qemu/optee_examples/hello_world/host/main.c > CMakeFiles/optee_example_hello_world.dir/host/main.c.i
+	cd /home/minho/optee_qemu/optee_examples/hello_world && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/minho/optee_qemu/optee_examples/hello_world/host/main.c > CMakeFiles/optee_example_hello_world.dir/host/main.c.i
 
 hello_world/CMakeFiles/optee_example_hello_world.dir/host/main.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/optee_example_hello_world.dir/host/main.c.s"
-	cd /home/minho/optee_qemu/optee_examples/hello_world && /usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/minho/optee_qemu/optee_examples/hello_world/host/main.c -o CMakeFiles/optee_example_hello_world.dir/host/main.c.s
+	cd /home/minho/optee_qemu/optee_examples/hello_world && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/minho/optee_qemu/optee_examples/hello_world/host/main.c -o CMakeFiles/optee_example_hello_world.dir/host/main.c.s
 
 # Object files for target optee_example_hello_world
 optee_example_hello_world_OBJECTS = \

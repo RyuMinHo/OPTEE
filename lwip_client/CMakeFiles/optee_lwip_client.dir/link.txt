@@ -1,0 +1,1 @@
+ccache /usr/bin/cc -rdynamic CMakeFiles/optee_lwip_client.dir/host/main.c.o -o optee_lwip_client  -lteec 

@@ -163,6 +163,9 @@ enum netif_mac_filter_action {
   NETIF_ADD_MAC_FILTER = 1
 };
 
+/* added */
+err_t netif_loopif_init(struct netif *netif);
+
 /** Function prototype for netif init functions. Set up flags and output/linkoutput
  * callback functions in this function.
  *

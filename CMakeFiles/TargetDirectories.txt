@@ -46,6 +46,13 @@
 /home/minho/optee_qemu/optee_examples/lwip_test/CMakeFiles/install.dir
 /home/minho/optee_qemu/optee_examples/lwip_test/CMakeFiles/install/local.dir
 /home/minho/optee_qemu/optee_examples/lwip_test/CMakeFiles/install/strip.dir
+/home/minho/optee_qemu/optee_examples/ping/CMakeFiles/optee_ping.dir
+/home/minho/optee_qemu/optee_examples/ping/CMakeFiles/edit_cache.dir
+/home/minho/optee_qemu/optee_examples/ping/CMakeFiles/rebuild_cache.dir
+/home/minho/optee_qemu/optee_examples/ping/CMakeFiles/list_install_components.dir
+/home/minho/optee_qemu/optee_examples/ping/CMakeFiles/install.dir
+/home/minho/optee_qemu/optee_examples/ping/CMakeFiles/install/local.dir
+/home/minho/optee_qemu/optee_examples/ping/CMakeFiles/install/strip.dir
 /home/minho/optee_qemu/optee_examples/plugins/CMakeFiles/optee_example_plugins.dir
 /home/minho/optee_qemu/optee_examples/plugins/CMakeFiles/edit_cache.dir
 /home/minho/optee_qemu/optee_examples/plugins/CMakeFiles/rebuild_cache.dir

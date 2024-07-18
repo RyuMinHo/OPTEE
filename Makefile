@@ -240,6 +240,19 @@ optee_lwip_test/fast:
 .PHONY : optee_lwip_test/fast
 
 #=============================================================================
+# Target rules for targets named optee_ping
+
+# Build rule for target.
+optee_ping: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 optee_ping
+.PHONY : optee_ping
+
+# fast build rule for target.
+optee_ping/fast:
+	$(MAKE) $(MAKESILENT) -f ping/CMakeFiles/optee_ping.dir/build.make ping/CMakeFiles/optee_ping.dir/build
+.PHONY : optee_ping/fast
+
+#=============================================================================
 # Target rules for targets named optee_example_plugins
 
 # Build rule for target.
@@ -326,6 +339,7 @@ help:
 	@echo "... optee_example_secure_storage"
 	@echo "... optee_lwip_client"
 	@echo "... optee_lwip_test"
+	@echo "... optee_ping"
 	@echo "... optee_ta2ta_test"
 .PHONY : help
 

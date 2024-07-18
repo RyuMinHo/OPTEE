@@ -1,1 +1,1 @@
-ccache /usr/bin/aarch64-linux-gnu-gcc -fPIC -shared -Wl,-soname,96bcf744-4f72-4866-bf1d-8634fd9c65e5.plugin.so -o 96bcf744-4f72-4866-bf1d-8634fd9c65e5.plugin.so CMakeFiles/96bcf744-4f72-4866-bf1d-8634fd9c65e5.plugin.dir/syslog_plugin.c.o  -lteec 
+ccache /usr/bin/cc -fPIC -shared -Wl,-soname,96bcf744-4f72-4866-bf1d-8634fd9c65e5.plugin.so -o 96bcf744-4f72-4866-bf1d-8634fd9c65e5.plugin.so CMakeFiles/96bcf744-4f72-4866-bf1d-8634fd9c65e5.plugin.dir/syslog_plugin.c.o  -lteec 

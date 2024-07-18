@@ -39,7 +39,7 @@ endif()
 
 # Set default install directory permissions.
 if(NOT DEFINED CMAKE_OBJDUMP)
-  set(CMAKE_OBJDUMP "/usr/bin/aarch64-linux-gnu-objdump")
+  set(CMAKE_OBJDUMP "/usr/bin/objdump")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
@@ -61,7 +61,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
   if(EXISTS "$ENV{DESTDIR}/usr/lib/tee-supplicant/plugins/96bcf744-4f72-4866-bf1d-8634fd9c65e5.plugin.so" AND
      NOT IS_SYMLINK "$ENV{DESTDIR}/usr/lib/tee-supplicant/plugins/96bcf744-4f72-4866-bf1d-8634fd9c65e5.plugin.so")
     if(CMAKE_INSTALL_DO_STRIP)
-      execute_process(COMMAND "/usr/bin/aarch64-linux-gnu-strip" "$ENV{DESTDIR}/usr/lib/tee-supplicant/plugins/96bcf744-4f72-4866-bf1d-8634fd9c65e5.plugin.so")
+      execute_process(COMMAND "/usr/bin/strip" "$ENV{DESTDIR}/usr/lib/tee-supplicant/plugins/96bcf744-4f72-4866-bf1d-8634fd9c65e5.plugin.so")
     endif()
   endif()
 endif()

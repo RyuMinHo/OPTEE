@@ -41,7 +41,7 @@
  * TA properties: multi-instance TA, no specific attribute
  * TA_FLAG_EXEC_DDR is meaningless but mandated.
  */
-#define TA_FLAGS			TA_FLAG_EXEC_DDR
+#define TA_FLAGS			(TA_FLAG_EXEC_DDR | TA_FLAG_INSTANCE_KEEP_ALIVE | TA_FLAG_MULTI_SESSION)
 
 /* Provisioned stack size */
 #define TA_STACK_SIZE			(2 * 1024)
@@ -53,7 +53,7 @@
 #define TA_VERSION	"1.0"
 
 /* The gpd.ta.description property */
-#define TA_DESCRIPTION	"Example of OP-TEE Echo Trusted Application"
+#define TA_DESCRIPTION	"Example of OP-TEE Client Trusted Application"
 
 /* Extra properties */
 #define TA_CURRENT_TA_EXT_PROPERTIES \
