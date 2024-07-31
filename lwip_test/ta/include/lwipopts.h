@@ -32,6 +32,9 @@
 #ifndef LWIP_LWIPOPTS_H
 #define LWIP_LWIPOPTS_H
 
+#include <stdio.h>
+#include <stdlib.h>
+
 #ifdef LWIP_OPTTEST_FILE
 #include "lwipopts_test.h"
 #else /* LWIP_OPTTEST_FILE */
@@ -78,25 +81,25 @@
 
 #define LWIP_DBG_MIN_LEVEL         0
 #define PPP_DEBUG                  LWIP_DBG_OFF
-#define MEM_DEBUG                  LWIP_DBG_OFF
-#define MEMP_DEBUG                 LWIP_DBG_OFF
-#define PBUF_DEBUG                 LWIP_DBG_OFF
+#define MEM_DEBUG                  LWIP_DBG_ON
+#define MEMP_DEBUG                 LWIP_DBG_ON
+#define PBUF_DEBUG                 LWIP_DBG_ON
 #define API_LIB_DEBUG              LWIP_DBG_OFF
 #define API_MSG_DEBUG              LWIP_DBG_OFF
 #define TCPIP_DEBUG                LWIP_DBG_OFF
-#define NETIF_DEBUG                LWIP_DBG_OFF
-#define SOCKETS_DEBUG              LWIP_DBG_OFF
+#define NETIF_DEBUG                LWIP_DBG_ON
+#define SOCKETS_DEBUG              LWIP_DBG_ON
 #define DNS_DEBUG                  LWIP_DBG_OFF
 #define AUTOIP_DEBUG               LWIP_DBG_OFF
 #define DHCP_DEBUG                 LWIP_DBG_OFF
-#define IP_DEBUG                   LWIP_DBG_OFF
+#define IP_DEBUG                   LWIP_DBG_ON
 #define IP_REASS_DEBUG             LWIP_DBG_OFF
 #define ICMP_DEBUG                 LWIP_DBG_OFF
 #define IGMP_DEBUG                 LWIP_DBG_OFF
 #define UDP_DEBUG                  LWIP_DBG_OFF
-#define TCP_DEBUG                  LWIP_DBG_OFF
-#define TCP_INPUT_DEBUG            LWIP_DBG_OFF
-#define TCP_OUTPUT_DEBUG           LWIP_DBG_OFF
+#define TCP_DEBUG                  LWIP_DBG_ON
+#define TCP_INPUT_DEBUG            LWIP_DBG_ON
+#define TCP_OUTPUT_DEBUG           LWIP_DBG_ON
 #define TCP_RTO_DEBUG              LWIP_DBG_OFF
 #define TCP_CWND_DEBUG             LWIP_DBG_OFF
 #define TCP_WND_DEBUG              LWIP_DBG_OFF

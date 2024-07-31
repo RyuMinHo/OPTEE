@@ -169,7 +169,7 @@ static void init_my_netif(void) {
 	printf("Netmask: %s\n", ip4addr_ntoa(&netmask));
 	printf("Gateway: %s\n", ip4addr_ntoa(&gw));
 
-	netif_add(&my_netif, &ipaddr, &netmask, &gw, NULL, netif_loopif_init, ip_input);
+	netif_add(&my_netif, &ipaddr, &netmask, &gw, NULL, netif_loopif_init, netif_input);
 
 	printf("2nd settings:\n");
         printf("IP Address: %s\n", ip4addr_ntoa(&(my_netif.ip_addr)));
@@ -180,7 +180,7 @@ static void init_my_netif(void) {
 
         netif_set_status_callback(&my_netif, status_callback);
 
-	printf("3rd settings:\n");
+/*	printf("3rd settings:\n");
         printf("IP Address: %s\n", ip4addr_ntoa(&(my_netif.ip_addr)));
         printf("Netmask: %s\n", ip4addr_ntoa(&(my_netif.netmask)));
         printf("Gateway: %s\n", ip4addr_ntoa(&(my_netif.gw)));
@@ -191,11 +191,11 @@ static void init_my_netif(void) {
         printf("IP Address: %s\n", ip4addr_ntoa(&(my_netif.ip_addr)));
         printf("Netmask: %s\n", ip4addr_ntoa(&(my_netif.netmask)));
         printf("Gateway: %s\n", ip4addr_ntoa(&(my_netif.gw)));
-
+*/
         netif_set_up(&my_netif);
 
-        printf("Starting custom lwIP, local interface IP is %s\n", ip4addr_ntoa(&(my_netif.ip_addr)));
-        printf("Netmask: %s, Gateway: %s\n", ip4addr_ntoa(&(my_netif.netmask)), ip4addr_ntoa(&(my_netif.gw)));
+        printf("Starting custom lwIP, local interface IP is %s\n", ip4addr_ntoa(&ipaddr));
+        printf("Netmask: %s, Gateway: %s\n", ip4addr_ntoa(&netmask), ip4addr_ntoa(&gw));
 }
 
 
@@ -578,10 +578,11 @@ TEE_Result TA_InvokeCommandEntryPoint(void __maybe_unused *sess_ctx, uint32_t cm
 /* This function is only required to prevent arch.h including stdio.h
  * (which it does if LWIP_PLATFORM_ASSERT is undefined)
  */
-
+/*
 void lwip_example_app_platform_assert(const char *msg, int line, const char *file)
 {
   printf("Assertion \"%s\" failed at line %d in %s\n", msg, line, file);
   //fflush(NULL);
   abort();
 }
+*/

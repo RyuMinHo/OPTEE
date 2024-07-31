@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/minho/optee_qemu/optee_examples/ping
+CMAKE_SOURCE_DIR = /home/minho/optee_qemu/optee_examples
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/minho/optee_qemu/optee_examples/ping
+CMAKE_BINARY_DIR = /home/minho/optee_qemu/optee_examples
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -132,14 +132,14 @@ install/strip/fast: preinstall/fast
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/minho/optee_qemu/optee_examples/ping/CMakeFiles /home/minho/optee_qemu/optee_examples/ping//CMakeFiles/progress.marks
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/minho/optee_qemu/optee_examples/ping/CMakeFiles 0
+	cd /home/minho/optee_qemu/optee_examples && $(CMAKE_COMMAND) -E cmake_progress_start /home/minho/optee_qemu/optee_examples/CMakeFiles /home/minho/optee_qemu/optee_examples/ping//CMakeFiles/progress.marks
+	cd /home/minho/optee_qemu/optee_examples && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ping/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/minho/optee_qemu/optee_examples/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 clean
+	cd /home/minho/optee_qemu/optee_examples && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ping/clean
 .PHONY : clean
 
 # The main clean target
@@ -148,46 +148,56 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 preinstall
+	cd /home/minho/optee_qemu/optee_examples && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ping/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 preinstall
+	cd /home/minho/optee_qemu/optee_examples && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ping/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/minho/optee_qemu/optee_examples && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
-#=============================================================================
-# Target rules for targets named optee_ping
+# Convenience name for target.
+ping/CMakeFiles/optee_ping.dir/rule:
+	cd /home/minho/optee_qemu/optee_examples && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ping/CMakeFiles/optee_ping.dir/rule
+.PHONY : ping/CMakeFiles/optee_ping.dir/rule
 
-# Build rule for target.
-optee_ping: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 optee_ping
+# Convenience name for target.
+optee_ping: ping/CMakeFiles/optee_ping.dir/rule
 .PHONY : optee_ping
 
 # fast build rule for target.
 optee_ping/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/optee_ping.dir/build.make CMakeFiles/optee_ping.dir/build
+	cd /home/minho/optee_qemu/optee_examples && $(MAKE) $(MAKESILENT) -f ping/CMakeFiles/optee_ping.dir/build.make ping/CMakeFiles/optee_ping.dir/build
 .PHONY : optee_ping/fast
 
-# target to build an object file
-host/main.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/optee_ping.dir/build.make CMakeFiles/optee_ping.dir/host/main.o
+host/main.o: host/main.c.o
 .PHONY : host/main.o
 
-# target to preprocess a source file
-host/main.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/optee_ping.dir/build.make CMakeFiles/optee_ping.dir/host/main.i
+# target to build an object file
+host/main.c.o:
+	cd /home/minho/optee_qemu/optee_examples && $(MAKE) $(MAKESILENT) -f ping/CMakeFiles/optee_ping.dir/build.make ping/CMakeFiles/optee_ping.dir/host/main.c.o
+.PHONY : host/main.c.o
+
+host/main.i: host/main.c.i
 .PHONY : host/main.i
 
-# target to generate assembly for a file
-host/main.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/optee_ping.dir/build.make CMakeFiles/optee_ping.dir/host/main.s
+# target to preprocess a source file
+host/main.c.i:
+	cd /home/minho/optee_qemu/optee_examples && $(MAKE) $(MAKESILENT) -f ping/CMakeFiles/optee_ping.dir/build.make ping/CMakeFiles/optee_ping.dir/host/main.c.i
+.PHONY : host/main.c.i
+
+host/main.s: host/main.c.s
 .PHONY : host/main.s
+
+# target to generate assembly for a file
+host/main.c.s:
+	cd /home/minho/optee_qemu/optee_examples && $(MAKE) $(MAKESILENT) -f ping/CMakeFiles/optee_ping.dir/build.make ping/CMakeFiles/optee_ping.dir/host/main.c.s
+.PHONY : host/main.c.s
 
 # Help Target
 help:
@@ -216,6 +226,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/minho/optee_qemu/optee_examples && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/optee_ping.dir/host/main.o"
-  "CMakeFiles/optee_ping.dir/host/main.o.d"
+  "CMakeFiles/optee_ping.dir/host/main.c.o"
+  "CMakeFiles/optee_ping.dir/host/main.c.o.d"
   "optee_ping"
   "optee_ping.pdb"
 )

@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/minho/optee_qemu/optee_examples/ping/host/main.c" "CMakeFiles/optee_ping.dir/host/main.o" "gcc" "CMakeFiles/optee_ping.dir/host/main.o.d"
+  "/home/minho/optee_qemu/optee_examples/ping/host/main.c" "ping/CMakeFiles/optee_ping.dir/host/main.c.o" "gcc" "ping/CMakeFiles/optee_ping.dir/host/main.c.o.d"
   )
 
 # Targets to which this target links.
