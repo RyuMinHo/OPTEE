@@ -690,7 +690,6 @@ void netif_invoke_ext_callback(struct netif* netif, netif_nsc_reason_t reason, c
 struct netif* netif_get_loopif(void);
 #endif
 
-
 #ifdef __cplusplus
 }
 #endif

@@ -37,9 +37,9 @@
 #else /* LWIP_OPTTEST_FILE */
 
 #define LWIP_IPV4                  1
-#define LWIP_IPV6                  1
+#define LWIP_IPV6                  0 
 
-#define NO_SYS                     0
+#define NO_SYS                     1 
 #define LWIP_SOCKET                (NO_SYS==0)
 #define LWIP_NETCONN               (NO_SYS==0)
 #define LWIP_NETIF_API             (NO_SYS==0)
@@ -80,23 +80,23 @@
 #define PPP_DEBUG                  LWIP_DBG_OFF
 #define MEM_DEBUG                  LWIP_DBG_OFF
 #define MEMP_DEBUG                 LWIP_DBG_OFF
-#define PBUF_DEBUG                 LWIP_DBG_OFF
+#define PBUF_DEBUG                 LWIP_DBG_ON
 #define API_LIB_DEBUG              LWIP_DBG_OFF
 #define API_MSG_DEBUG              LWIP_DBG_OFF
 #define TCPIP_DEBUG                LWIP_DBG_OFF
-#define NETIF_DEBUG                LWIP_DBG_OFF
-#define SOCKETS_DEBUG              LWIP_DBG_OFF
+#define NETIF_DEBUG                LWIP_DBG_ON
+#define SOCKETS_DEBUG              LWIP_DBG_ON
 #define DNS_DEBUG                  LWIP_DBG_OFF
 #define AUTOIP_DEBUG               LWIP_DBG_OFF
 #define DHCP_DEBUG                 LWIP_DBG_OFF
-#define IP_DEBUG                   LWIP_DBG_OFF
+#define IP_DEBUG                   LWIP_DBG_ON
 #define IP_REASS_DEBUG             LWIP_DBG_OFF
 #define ICMP_DEBUG                 LWIP_DBG_OFF
 #define IGMP_DEBUG                 LWIP_DBG_OFF
 #define UDP_DEBUG                  LWIP_DBG_OFF
-#define TCP_DEBUG                  LWIP_DBG_OFF
-#define TCP_INPUT_DEBUG            LWIP_DBG_OFF
-#define TCP_OUTPUT_DEBUG           LWIP_DBG_OFF
+#define TCP_DEBUG                  LWIP_DBG_ON
+#define TCP_INPUT_DEBUG            LWIP_DBG_ON
+#define TCP_OUTPUT_DEBUG           LWIP_DBG_ON
 #define TCP_RTO_DEBUG              LWIP_DBG_OFF
 #define TCP_CWND_DEBUG             LWIP_DBG_OFF
 #define TCP_WND_DEBUG              LWIP_DBG_OFF
@@ -262,7 +262,7 @@ a lot of data that needs to be copied, this should be set high. */
 
 /* ---------- Statistics options ---------- */
 
-#define LWIP_STATS              1
+#define LWIP_STATS              1 
 #define LWIP_STATS_DISPLAY      1
 
 #if LWIP_STATS
@@ -284,7 +284,7 @@ a lot of data that needs to be copied, this should be set high. */
 
 /* ---------- PPP options ---------- */
 
-#define PPP_SUPPORT             1      /* Set > 0 for PPP */
+#define PPP_SUPPORT             0      /* Set > 0 for PPP */
 
 #if PPP_SUPPORT
 

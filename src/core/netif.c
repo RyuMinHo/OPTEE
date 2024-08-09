@@ -169,7 +169,7 @@ netif_loopif_init(struct netif *netif)
   MIB2_INIT_NETIF(netif, snmp_ifType_softwareLoopback, 0);
 
   netif->name[0] = 'l';
-  netif->name[1] = 'o';
+  netif->name[1] = 'm';
 #if LWIP_IPV4
   netif->output = netif_loop_output_ipv4;
 #endif
@@ -192,7 +192,7 @@ netif_init(void)
 #define LOOPIF_ADDRINIT &loop_ipaddr, &loop_netmask, &loop_gw,
   ip4_addr_t loop_ipaddr, loop_netmask, loop_gw;
   IP4_ADDR(&loop_gw, 127, 0, 0, 1);
-  IP4_ADDR(&loop_ipaddr, 127, 0, 0, 1);
+  IP4_ADDR(&loop_ipaddr, 127, 0, 0, 2);
   IP4_ADDR(&loop_netmask, 255, 0, 0, 0);
 #else /* LWIP_IPV4 */
 #define LOOPIF_ADDRINIT
@@ -211,7 +211,7 @@ netif_init(void)
 
   netif_set_link_up(&loop_netif);
   netif_set_up(&loop_netif);
-
+  netif_set_default(&loop_netif);
 #endif /* LWIP_HAVE_LOOPIF */
 }
 
