@@ -185,7 +185,7 @@ int main(void)
 
 	printf("- Create and load object in the TA secure storage\n");
 
-	memset(obj1_data, 0xA1, sizeof(obj1_data));
+	memset(obj1_data, 0x41, sizeof(obj1_data));
 
 	res = write_secure_object(&ctx, obj1_id,
 				  obj1_data, sizeof(obj1_data));
@@ -196,6 +196,8 @@ int main(void)
 
 	res = read_secure_object(&ctx, obj1_id,
 				 read_data, sizeof(read_data));
+	printf("%s\n", read_data);
+
 	if (res != TEEC_SUCCESS)
 		errx(1, "Failed to read an object from the secure storage");
 	if (memcmp(obj1_data, read_data, sizeof(obj1_data)))

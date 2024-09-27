@@ -152,6 +152,7 @@ ip_addr_t server_ip;
 
 #define NETIF_ADDRS ipaddr, netmask, gw,
 
+/*
 static void init_my_netif(void) {
         ip4_addr_t ipaddr, netmask, gw;
 
@@ -180,7 +181,7 @@ static void init_my_netif(void) {
 
         netif_set_status_callback(&my_netif, status_callback);
 
-/*	printf("3rd settings:\n");
+	printf("3rd settings:\n");
         printf("IP Address: %s\n", ip4addr_ntoa(&(my_netif.ip_addr)));
         printf("Netmask: %s\n", ip4addr_ntoa(&(my_netif.netmask)));
         printf("Gateway: %s\n", ip4addr_ntoa(&(my_netif.gw)));
@@ -191,13 +192,13 @@ static void init_my_netif(void) {
         printf("IP Address: %s\n", ip4addr_ntoa(&(my_netif.ip_addr)));
         printf("Netmask: %s\n", ip4addr_ntoa(&(my_netif.netmask)));
         printf("Gateway: %s\n", ip4addr_ntoa(&(my_netif.gw)));
-*/
+
         netif_set_up(&my_netif);
 
         printf("Starting custom lwIP, local interface IP is %s\n", ip4addr_ntoa(&ipaddr));
         printf("Netmask: %s, Gateway: %s\n", ip4addr_ntoa(&netmask), ip4addr_ntoa(&gw));
 }
-
+*/
 
 void
 default_netif_poll(void)
@@ -414,8 +415,8 @@ void my_tcpecho_raw_init(void) {
 	if(my_tcpecho_raw_pcb != NULL) {
                 err_t err;
 
-                /*IP4_ADDR(&server_ip, 169, 254, 12, 100);*/
-                err = tcp_bind(my_tcpecho_raw_pcb, IP_ADDR_ANY, 7);
+                IP4_ADDR(&server_ip, 127, 0, 0, 1);
+                err = tcp_bind(my_tcpecho_raw_pcb, &server_ip, 7);
                 if( err == ERR_OK ) {
                         printf("TCP bind successful on port 7\n");
                         my_tcpecho_raw_pcb = tcp_listen(my_tcpecho_raw_pcb);
@@ -436,7 +437,7 @@ static void my_init(void *arg) {
 	//srand(seed);
         printf("%s\n", __func__);
 	LWIP_UNUSED_ARG(arg);
-        init_my_netif();
+        //init_my_netif();
         my_tcpecho_raw_init();
 }
 
@@ -447,7 +448,6 @@ static void main_loop(void) {
         my_init(NULL);
         while(!LWIP_EXAMPLE_APP_ABORT()) {
 		sys_check_timeouts();
-                default_netif_poll();
                 netif_poll_all();
 		TEE_Wait(1000);
         }

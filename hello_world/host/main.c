@@ -34,6 +34,7 @@
 
 /* For the UUID (found in the TA's h-file(s)) */
 #include <hello_world_ta.h>
+#include <rtst_socket.h>
 
 int main(void)
 {
@@ -43,7 +44,7 @@ int main(void)
 	TEEC_Operation op;
 	TEEC_UUID uuid = TA_HELLO_WORLD_UUID;
 	uint32_t err_origin;
-
+	printf("ctx address: %p\n", &ctx);
 	/* Initialize a context connecting us to the TEE */
 	res = TEEC_InitializeContext(NULL, &ctx);
 	if (res != TEEC_SUCCESS)
@@ -89,6 +90,15 @@ int main(void)
 		errx(1, "TEEC_InvokeCommand failed with code 0x%x origin 0x%x",
 			res, err_origin);
 	printf("TA incremented value to %d\n", op.params[0].value.a);
+/*
+	char buf[1024];
+	memset(&op, 0, sizeof(op));
+	op.paramTypes = TEEC_PARAM_TYPES(TEEC_MEMREF_INPUT, )
+*/	res = TEEC_InvokeCommand(&sess, TA_UDPSOCKETINIT_CMD, &op, &err_origin);
+	
+	
+
+	res = TEEC_InvokeCommand(&sess, TA_UDPSOCKETSEND_CMD, &op, &err_origin);
 
 	/*
 	 * We're done with the TA, close the session and

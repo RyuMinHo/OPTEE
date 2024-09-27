@@ -27,12 +27,17 @@
 
 #include <tee_internal_api.h>
 #include <tee_internal_api_extensions.h>
-
+#include <string.h>
 #include <hello_world_ta.h>
 #include <ta2ta_ta.h>
 
+#define PTA_SHARED_MEM_UUID { 0xab99da90, 0xc970, 0x45fc, \
+                                {0x99, 0x46, 0xa6, 0x61, 0x63, 0x43, 0xc7, 0xb1} }
+
 const static TEE_UUID uuid_ta2ta = { 0x8aaaf200, 0x2450, 0x11e4, 
                 { 0xab, 0xe2, 0x00, 0x02, 0xa5, 0xd5, 0xc5, 0x1b} };
+
+
 
 static TEE_TASessionHandle session = TEE_HANDLE_NULL;
 
@@ -134,6 +139,58 @@ void TA_CloseSessionEntryPoint(void __maybe_unused *sess_ctx)
 	IMSG("TA1: Goodbye!\n");
 }
 
+TEE_Result save_string_to_secure_storage(void) {
+    TEE_Result res;
+    TEE_ObjectHandle object;
+    const char* data = "Hello, OP-TEE!\n";
+    uint32_t obj_id = 1;
+    uint32_t data_size = strlen(data) + 1;
+
+
+    IMSG("Attempting to create persistent object with ID: %u", obj_id);
+    res = TEE_CreatePersistentObject(TEE_STORAGE_PRIVATE, &obj_id, sizeof(obj_id),
+                                     TEE_DATA_FLAG_ACCESS_WRITE | TEE_DATA_FLAG_OVERWRITE,
+                                     NULL, data, data_size, &object);
+
+    if (res == TEE_SUCCESS) {
+        IMSG("Persistent object created successfully");
+        TEE_CloseObject(object);
+    } else {
+        EMSG("Failed to create persistent object: 0x%x", res);
+    }
+
+    return res;
+}
+
+TEE_Result read_string_from_secure_storage(void) {
+    TEE_Result res;
+    TEE_ObjectHandle object;
+    uint32_t obj_id = 1;
+    uint32_t buffer_size = 1024;
+    void *buffer = TEE_Malloc(buffer_size, TEE_MALLOC_FILL_ZERO);
+    if (buffer == NULL) {
+        EMSG("Failed to allocate memory for buffer");
+        return TEE_ERROR_OUT_OF_MEMORY;
+    }
+    IMSG("Attempting to open persistent object with ID: %u", obj_id);
+    res = TEE_OpenPersistentObject(TEE_STORAGE_PRIVATE, &obj_id, sizeof(obj_id),
+                                   TEE_DATA_FLAG_ACCESS_READ, &object);
+    if (res == TEE_SUCCESS) {
+        uint32_t read_bytes = buffer_size;
+        res = TEE_ReadObjectData(object, buffer, buffer_size, &read_bytes);
+        if (res == TEE_SUCCESS) {
+            IMSG("Read string: %s", (char *)buffer);
+        } else {
+            EMSG("Failed to read object data: 0x%x", res);
+        }
+        TEE_CloseObject(object);
+    } else {
+        EMSG("Failed to open persistent object: 0x%x", res);
+    }
+    TEE_Free(buffer);
+    return res;
+}
+
 static TEE_Result inc_value(uint32_t param_types, TEE_Param params[4])
 {
 	uint32_t exp_param_types = TEE_PARAM_TYPES(TEE_PARAM_TYPE_VALUE_INOUT,
@@ -159,7 +216,9 @@ static TEE_Result inc_value(uint32_t param_types, TEE_Param params[4])
 	IMSG("Got value: %u from NW", params[0].value.a);
 	params[0].value.a++;
 	IMSG("Increase value to: %u", params[0].value.a);
-
+	
+	printf("save string to secure storage\n");
+	save_string_to_secure_storage();
 
 	if ( session == TEE_HANDLE_NULL ) {
 		IMSG("TA1: Gonna call TEE_OpenTASession");
@@ -180,7 +239,7 @@ static TEE_Result inc_value(uint32_t param_types, TEE_Param params[4])
 		}
 	}
 
-
+	read_string_from_secure_storage();
 
 	TEE_Wait(500);
 /*

@@ -27,8 +27,9 @@
 
 #include <tee_internal_api.h>
 #include <tee_internal_api_extensions.h>
-
+#include <string.h>
 #include <hello_world_ta.h>
+#include <rtst_socket.h>
 
 //uint32_t sys_now(void);
 static void get_monotonic_time(TEE_Time *t);
@@ -43,7 +44,7 @@ get_monotonic_time(TEE_Time *t) {
 uint32_t
 sys_now(void) {
   
-  TEE_Time t;
+  TEE_Time t = { };
   
   uint32_t now;
   
@@ -70,7 +71,6 @@ lwip_port_rand(void)
 TEE_Result TA_CreateEntryPoint(void)
 {
 	DMSG("has been called");
-
 	return TEE_SUCCESS;
 }
 
@@ -113,6 +113,12 @@ TEE_Result TA_OpenSessionEntryPoint(uint32_t param_types,
 	 */
 	IMSG("Hello World!\n");
 
+	//char test[30] = "abcdefghijklmnopqrstuvwxyz";
+
+	//TEE_GetMysyscall(test, 27);
+
+	//IMSG("Hello Syscall! %d\n", test_num);
+
 	/* If return value != TEE_SUCCESS the session will not be created. */
 	return TEE_SUCCESS;
 }
@@ -127,6 +133,26 @@ void TA_CloseSessionEntryPoint(void __maybe_unused *sess_ctx)
 	IMSG("Goodbye!\n");
 }
 
+static TEE_Result udpsocketinit(void) {
+	TEE_UDPServerSocketInit("127.0.0.1", 7777);
+	TEE_UDPClientSocketInit("127.0.0.1", 8);
+
+	return TEE_SUCCESS;
+}
+
+static TEE_Result udpsocketsend(void) {
+
+	char str_1[30] = "abcdefghijklmnopqrstuvwxyz";
+	char str_2[20] = "1234567890123456789";
+	for(int i = 0; i < 100; i++) {
+		IMSG("%d tries\n", i + 1);
+		TEE_UDPSend(str_1, 27);
+        	TEE_UDPSend(str_2, 20);
+		TEE_Wait(100);
+	}
+	return TEE_SUCCESS;
+}
+
 static TEE_Result inc_value(uint32_t param_types,
 	TEE_Param params[4])
 {
@@ -135,6 +161,10 @@ static TEE_Result inc_value(uint32_t param_types,
 						   TEE_PARAM_TYPE_NONE,
 						   TEE_PARAM_TYPE_NONE);
 	DMSG("has been called");
+
+
+        
+	
 	
 	TEE_Time t;
 //	TEE_MemFill(t, 0, sizeof(TEE_Time));
@@ -142,7 +172,7 @@ static TEE_Result inc_value(uint32_t param_types,
 	IMSG("Current time :%u, %u", t.seconds, t.millis);
 	uint32_t test = sys_now();
 	printf("sys_now test: %u\n", test);
-
+	
 	if (param_types != exp_param_types)
 		return TEE_ERROR_BAD_PARAMETERS;
 	
@@ -152,6 +182,7 @@ static TEE_Result inc_value(uint32_t param_types,
 	IMSG("Got value: %u from NW", params[0].value.a);
 	params[0].value.a++;
 	IMSG("Increase value to: %u", params[0].value.a);
+
 
 	return TEE_SUCCESS;
 }
@@ -192,6 +223,10 @@ TEE_Result TA_InvokeCommandEntryPoint(void __maybe_unused *sess_ctx,
 		return inc_value(param_types, params);
 	case TA_HELLO_WORLD_CMD_DEC_VALUE:
 		return lwip_port_rand();
+	case TA_UDPSOCKETINIT_CMD:
+		return udpsocketinit();
+	case TA_UDPSOCKETSEND_CMD:
+		return udpsocketsend();
 	default:
 		return TEE_ERROR_BAD_PARAMETERS;
 	}

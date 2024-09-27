@@ -234,8 +234,8 @@ netif_init(void)
 #if LWIP_IPV4
 #define LOOPIF_ADDRINIT &loop_ipaddr, &loop_netmask, &loop_gw,
   ip4_addr_t loop_ipaddr, loop_netmask, loop_gw;
-  IP4_ADDR(&loop_gw, 127, 0, 0, 1);
-  IP4_ADDR(&loop_ipaddr, 127, 0, 0, 1);
+  IP4_ADDR(&loop_gw, 0, 0, 0, 0);
+  IP4_ADDR(&loop_ipaddr, 127, 0, 0, 2);
   IP4_ADDR(&loop_netmask, 255, 0, 0, 0);
 #else /* LWIP_IPV4 */
 #define LOOPIF_ADDRINIT

@@ -12,6 +12,7 @@
 #include "lwip/raw.h"
 #include "lwip/tcp.h"
 #include "lwip/err.h"
+#include "lwip/init.h"
 #include "lwip/icmp.h"
 #include "lwip/netif.h"
 #include "lwip/sys.h"
@@ -97,9 +98,9 @@ void
 client_init(void)
 
 {
-  struct tcp_pcb *client = tcp_new();
+  struct tcp_pcb *client = tcp_new_ip_type(IPADDR_TYPE_ANY);
   ip_addr_t destIPADDR;
-  IP_ADDR4(&destIPADDR, 192, 168, 51, 234);
+  IP_ADDR4(&destIPADDR, 127, 0, 0, 1);
   printf("test1\n");
   tcp_connect(client, &destIPADDR, 7, tcp_client_raw_connected);
 }
@@ -540,13 +541,13 @@ static TEE_Result pseudo_main(uint32_t param_types, TEE_Param params[4]) {
                                                    TEE_PARAM_TYPE_NONE,
                                                    TEE_PARAM_TYPE_NONE,
                                                    TEE_PARAM_TYPE_NONE);
+   lwip_init();
+   client_init();
 
-   for(int i = 1; i <= 100; i++) {
-        printf("client_TA: %d\n", i);
-   }
-
-   while(1) {
-	   printf("client\n");
+   while(!LWIP_EXAMPLE_APP_ABORT()) {
+	   sys_check_timeouts();
+	   netif_poll_all();
+	   printf("%s\n", __func__);
    	   TEE_Wait(300);
    }
 
@@ -556,7 +557,6 @@ static TEE_Result pseudo_main(uint32_t param_types, TEE_Param params[4]) {
       return TEE_ERROR_BAD_PARAMETERS;
    }
 
-      client_init();
 
 
    TEE_Wait(500);
