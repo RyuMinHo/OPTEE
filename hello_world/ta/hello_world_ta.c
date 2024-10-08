@@ -133,17 +133,117 @@ void TA_CloseSessionEntryPoint(void __maybe_unused *sess_ctx)
 	IMSG("Goodbye!\n");
 }
 
-static TEE_Result udpsocketinit(void) {
+/*
+static TEE_Result udpsocketinit(uint32_t param_types, TEE_Param params[4]) {
+	
 	TEE_UDPServerSocketInit("127.0.0.1", 7777);
 	TEE_UDPClientSocketInit("127.0.0.1", 8);
 
 	return TEE_SUCCESS;
 }
+*/
+/*
+static TEE_Result udpsocketinit(uint32_t param_types, TEE_Param params[4])
+{
+    TEE_Result res;
+    char *ip_address;
+    uint32_t port;
 
-static TEE_Result udpsocketsend(void) {
+    // 파라미터 타입 검증
+    uint32_t exp_param_types = TEE_PARAM_TYPES(TEE_PARAM_TYPE_MEMREF_INPUT,
+                                               TEE_PARAM_TYPE_VALUE_INPUT,
+                                               TEE_PARAM_TYPE_NONE,
+                                               TEE_PARAM_TYPE_NONE);
+    if (param_types != exp_param_types)
+        return TEE_ERROR_BAD_PARAMETERS;
 
-	char str_1[30] = "abcdefghijklmnopqrstuvwxyz";
-	char str_2[20] = "1234567890123456789";
+    // 문자열(IP 주소) 파라미터 추출
+    ip_address = params[0].memref.buffer;
+    size_t ip_len = params[0].memref.size;
+
+    // IP 주소 길이 검증
+    if (ip_len >= 16) // IPv4 주소의 최대 길이는 15 (255.255.255.255)
+        return TEE_ERROR_BAD_PARAMETERS;
+
+    // 정수(포트) 파라미터 추출
+    port = params[1].value.a;
+
+    // UDP 서버 소켓 초기화
+    TEE_UDPServerSocketInit(ip_address, port);
+
+    // UDP 클라이언트 소켷 초기화 (포트 8 사용)
+    TEE_UDPClientSocketInit(ip_address, 8);
+
+    return TEE_SUCCESS;
+}
+*/
+
+static TEE_Result udpclientinit(uint32_t param_types, TEE_Param params[4]) {
+	TEE_Result res;
+	char *ip_address;
+	uint32_t port;
+
+	uint32_t exp_param_types = TEE_PARAM_TYPES(TEE_PARAM_TYPE_MEMREF_INPUT,
+                                               TEE_PARAM_TYPE_VALUE_INPUT,
+                                               TEE_PARAM_TYPE_NONE,
+                                               TEE_PARAM_TYPE_NONE);
+
+	if(param_types != exp_param_types) {
+		return TEE_ERROR_BAD_PARAMETERS;
+	}
+
+	ip_address = params[0].memref.buffer;
+	size_t ip_len = 10;
+	if(ip_len >= 16)
+		return TEE_ERROR_BAD_PARAMETERS;
+	
+	port = params[1].value.a;
+	DMSG("ipaddr for udp client socket: %s port: %d\n", ip_address, port);
+    	
+	// UDP 클라이언트 소켓 초기화 (포트 8 사용)
+	TEE_UDPClientSocketInit(ip_address, port);
+
+	return TEE_SUCCESS;
+}
+
+static TEE_Result udpserverinit(uint32_t param_types, TEE_Param params[4])
+{
+    TEE_Result res;
+    char *ip_address;
+    uint32_t port;
+
+    // 파라미터 타입 검증
+    uint32_t exp_param_types = TEE_PARAM_TYPES(TEE_PARAM_TYPE_MEMREF_INPUT,
+                                               TEE_PARAM_TYPE_VALUE_INPUT,
+                                               TEE_PARAM_TYPE_NONE,
+                                               TEE_PARAM_TYPE_NONE);
+    if (param_types != exp_param_types)
+        return TEE_ERROR_BAD_PARAMETERS;
+
+    // get IP address
+    ip_address = params[0].memref.buffer;
+    size_t ip_len = 10;
+
+    // verify length of IP address 
+    if (ip_len >= 16) 
+        return TEE_ERROR_BAD_PARAMETERS;
+
+    // 정수(포트) 파라미터 추출
+    port = params[1].value.a;
+
+    // UDP 서버 소켓 초기화
+    DMSG("ipaddr for udp server socket: %s port: %d\n", ip_address, port);
+
+    TEE_UDPServerSocketInit(ip_address, port);
+    TEE_UDPClientSocketInit(ip_address, 8);
+
+
+    return TEE_SUCCESS;
+}
+
+/*
+static TEE_Result udpsocketsend(uint32_t param_types, TEE_Param params[4]) {
+
 	for(int i = 0; i < 100; i++) {
 		IMSG("%d tries\n", i + 1);
 		TEE_UDPSend(str_1, 27);
@@ -151,6 +251,44 @@ static TEE_Result udpsocketsend(void) {
 		TEE_Wait(100);
 	}
 	return TEE_SUCCESS;
+}
+*/
+
+static TEE_Result udpsocketsend(uint32_t param_types, TEE_Param params[4])
+{
+    TEE_Result res;
+    char *message;
+    size_t message_len;
+
+    // 파라미터 타입 검증
+    uint32_t exp_param_types = TEE_PARAM_TYPES(TEE_PARAM_TYPE_MEMREF_INPUT,
+                                               TEE_PARAM_TYPE_NONE,
+                                               TEE_PARAM_TYPE_NONE,
+                                               TEE_PARAM_TYPE_NONE);
+    if (param_types != exp_param_types)
+        return TEE_ERROR_BAD_PARAMETERS;
+
+    // 메시지 추출
+    message = params[0].memref.buffer;
+    message_len = params[0].memref.size;
+
+    // 메시지 길이 검증
+    if (message_len == 0 || message_len > 1024)  // 적절한 최대 길이 설정
+        return TEE_ERROR_BAD_PARAMETERS;
+
+    // 메시지 전송
+    for (int i = 0; i < 100; i++) {
+        IMSG("%d tries\n", i + 1);
+        TEE_UDPSend(message, message_len);
+        if (res != TEE_SUCCESS) {
+            EMSG("Failed to send message on try %d", i + 1);
+            return res;
+        }
+        TEE_Wait(100);
+    }
+
+    IMSG("Message sent 100 times successfully");
+    return TEE_SUCCESS;
 }
 
 static TEE_Result inc_value(uint32_t param_types,
@@ -223,10 +361,12 @@ TEE_Result TA_InvokeCommandEntryPoint(void __maybe_unused *sess_ctx,
 		return inc_value(param_types, params);
 	case TA_HELLO_WORLD_CMD_DEC_VALUE:
 		return lwip_port_rand();
-	case TA_UDPSOCKETINIT_CMD:
-		return udpsocketinit();
+	case TA_UDPSERVERINIT_CMD:
+		return udpserverinit(param_types, params);
+	//case TA_UDPCLIENTINIT_CMD:
+	//	return udpclientinit(param_types, params);
 	case TA_UDPSOCKETSEND_CMD:
-		return udpsocketsend();
+		return udpsocketsend(param_types, params);
 	default:
 		return TEE_ERROR_BAD_PARAMETERS;
 	}
