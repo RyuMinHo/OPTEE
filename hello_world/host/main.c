@@ -36,14 +36,54 @@
 #include <hello_world_ta.h>
 #include <rtst_socket.h>
 
+TEEC_Result res;
+TEEC_Context ctx;
+TEEC_Session sess;
+TEEC_Operation op;
+uint32_t err_origin;
+
+void rtst_udpsocket(const char *ip, int p) {
+//	TEEC_Result res;
+	//TEEC_UUID uuid = TA_HELLO_WORLD_UUID;
+	TEEC_Operation op_init;
+        TEEC_SharedMemory ip_shm;
+        uint32_t port = p; // 원하는 포트 번호
+
+        // IP 주소를 위한 shared memory 설정
+        ip_shm.size = 16; // IPv4 주소의 최대 길이 + 1 (null 종료 문자)
+        ip_shm.flags = TEEC_MEM_INPUT;
+        res = TEEC_AllocateSharedMemory(&ctx, &ip_shm);
+        if (res != TEEC_SUCCESS) {
+            // 에러 처리
+            return ;
+        }
+
+        // IP 주소 복사
+        strncpy(ip_shm.buffer, ip, ip_shm.size);
+
+        // Operation 구조체 설정
+        memset(&op_init, 0, sizeof(op_init));
+        op_init.paramTypes = TEEC_PARAM_TYPES(TEEC_MEMREF_WHOLE, TEEC_VALUE_INPUT, TEEC_NONE, TEEC_NONE);
+        op_init.params[0].memref.parent = &ip_shm;
+        op_init.params[0].memref.size = strlen(ip_shm.buffer) + 1;
+        op_init.params[1].value.a = port;
+
+        // 명령 호출
+        res = TEEC_InvokeCommand(&sess, TA_UDPSERVERINIT_CMD, &op_init, &err_origin);
+
+        // 사용 후 shared memory 해제
+        TEEC_ReleaseSharedMemory(&ip_shm);
+
+
+}
+
 int main(void)
 {
-	TEEC_Result res;
+/*	TEEC_Result res;
 	TEEC_Context ctx;
 	TEEC_Session sess;
-	TEEC_Operation op;
+	TEEC_Operation op; */
 	TEEC_UUID uuid = TA_HELLO_WORLD_UUID;
-	uint32_t err_origin;
 	printf("ctx address: %p\n", &ctx);
 	/* Initialize a context connecting us to the TEE */
 	res = TEEC_InitializeContext(NULL, &ctx);
@@ -95,7 +135,7 @@ int main(void)
 	memset(&op, 0, sizeof(op));
 	op.paramTypes = TEEC_PARAM_TYPES(TEEC_MEMREF_INPUT, )
 */	
-	TEEC_Operation op_init;
+/*	TEEC_Operation op_init;
 	TEEC_SharedMemory ip_shm;
 	uint32_t port = 7777; // 원하는 포트 번호
 
@@ -123,7 +163,9 @@ int main(void)
 	
 	// 사용 후 shared memory 해제
 	TEEC_ReleaseSharedMemory(&ip_shm);
-	
+*/
+
+	rtst_udpsocket("127.0.0.1", 7777);	
 /*	TEEC_SharedMemory txbuf;
 
 	txbuf.size = 30;
